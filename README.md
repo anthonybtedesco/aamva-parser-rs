@@ -21,7 +21,7 @@ The purpose of this program is to parse data from North American ID cards follow
 | p         | DAK        | Postal code portion of the cardholder address in the U.S. and Canada. If the trailing portion of the postal code in the U.S. is not known, zeros will be used to fill the trailing set of numbers up to nine (9) digits. | Both      | F11ANS        |
 
 
-Given RAW pdf417 data the program will return either formatted json or yaml depending on a flag (default is JSON).
+Given RAW pdf417 data the program will return either formatted json or yaml depending on a -o flag (default is JSON).
 The default input for the program is stdin, however you can use the --file flag to load the data from a text file.
 
 ## Mapping from 3 Letter Code to Key. 
@@ -44,6 +44,7 @@ The default input for the program is stdin, however you can use the --file flag 
 | DAJ       | state          | State portion of the cardholder address.                                                                              |
 | DAK       | postal_code    | Postal code portion of the cardholder address in the U.S. and Canada. If the trailing portion of the postal code in the U.S. is not known, zeros will be used to fill the trailing set of numbers up to nine (9) digits. |
 ## Example Usage
-./pdf417-parser --file raw-data.txt --yaml
+./aamva-parser-rs --file raw-data.txt -o yaml
+cat raw-data.txt | ./aamva-parse-rs
 
 The above command would parse the raw data from raw-data.txt and output a yaml.
