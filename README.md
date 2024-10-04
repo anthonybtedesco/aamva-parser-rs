@@ -44,7 +44,7 @@ The default input for the program is stdin, however you can use the --file flag 
 | DAJ       | state          | State portion of the cardholder address.                                                                              |
 | DAK       | postal_code    | Postal code portion of the cardholder address in the U.S. and Canada. If the trailing portion of the postal code in the U.S. is not known, zeros will be used to fill the trailing set of numbers up to nine (9) digits. |
 ## Example Usage
-./aamva-parser-rs --file raw-data.txt -o yaml
-cat raw-data.txt | ./aamva-parse-rs
+- ./aamva-parser-rs --file raw-data.txt -o yaml
+- cat raw-data.txt | ./aamva-parse-rs
 
 The above command would parse the raw data from raw-data.txt and output a yaml.
