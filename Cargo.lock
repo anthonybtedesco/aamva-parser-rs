@@ -3,6 +3,17 @@
 version = 3
 
 [[package]]
+name = "aamva-parser-rs"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "clap",
+ "serde",
+ "serde_json",
+ "serde_yaml",
+]
+
+[[package]]
 name = "android-tzdata"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -265,17 +276,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "82881c4be219ab5faaf2ad5e5e5ecdff8c66bd7402ca3160975c93b24961afd1"
 dependencies = [
  "portable-atomic",
-]
-
-[[package]]
-name = "pdf417-parser"
-version = "0.1.0"
-dependencies = [
- "chrono",
- "clap",
- "serde",
- "serde_json",
- "serde_yaml",
 ]
 
 [[package]]
