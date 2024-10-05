@@ -1,0 +1,11 @@
+[package]
+name = "aamva-parser-rs-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aamva-parser-rs = {path="../aamva-parser-rs/"}
+
+[[bin]]
+name = "aamva-parser-rs-cli"
+path = "src/main.rs"

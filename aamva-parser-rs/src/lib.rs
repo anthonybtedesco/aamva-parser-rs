@@ -1,43 +1,46 @@
-use clap::Parser;
+// src/lib.rs
+
+pub use clap::Parser;
 use serde::Serialize;
+pub use serde_json;
+pub use serde_yaml;
 use std::collections::HashMap;
-use std::io::Read;
 
 #[derive(Serialize)]
-enum Gender {
+pub enum Gender {
     MALE = 1,
     FEMALE = 2,
     UNSPECIFIED = 9,
 }
 
 #[derive(clap::ValueEnum, Debug, Clone)]
-enum OutputFormat {
+pub enum OutputFormat {
     Json,
     Yaml,
 }
 
 #[derive(Serialize)]
-struct ParsedData {
-    vehicle_class: String,
-    driving_privileges: String,
-    additional_privileges: String,
-    expiration_date: String,
-    last_name: String,
-    first_name: String,
-    middle_name: String,
-    issue_date: String,
-    date_of_birth: String,
-    gender: Gender,
-    eye_color: String,
-    height: String,
-    street: String,
-    city: String,
-    state: String,
-    postal_code: String,
+pub struct ParsedData {
+    pub vehicle_class: String,
+    pub driving_privileges: String,
+    pub additional_privileges: String,
+    pub expiration_date: String,
+    pub last_name: String,
+    pub first_name: String,
+    pub middle_name: String,
+    pub issue_date: String,
+    pub date_of_birth: String,
+    pub gender: Gender,
+    pub eye_color: String,
+    pub height: String,
+    pub street: String,
+    pub city: String,
+    pub state: String,
+    pub postal_code: String,
 }
 
 impl ParsedData {
-    fn from_raw_data(raw_data: &str) -> Self {
+    pub fn from_raw_data(raw_data: &str) -> Self {
         let mut parsed_data = ParsedData {
             vehicle_class: String::new(),
             driving_privileges: String::new(),
@@ -170,62 +173,12 @@ impl ParsedData {
 }
 
 #[derive(Parser, Debug)]
-#[command(version, about, long_about = None)]
-struct CommandLineArguments {
+pub struct CommandLineArguments {
     #[arg(short, long, value_name = "FILE")]
     /// Input file (defaults to stdin if not provided)
-    file: Option<String>,
+    pub file: Option<String>,
 
     #[arg(short = 'o', long, value_name = "FORMAT", default_value = "json")]
     /// Output format (defaults to json)
-    format: OutputFormat,
-}
-
-fn main() {
-    // Gather Command Line Arguments
-    let args = CommandLineArguments::parse();
-    let mut raw_data = String::new();
-
-    match args.file {
-        Some(file_path) => {
-            // Try to open the file and read its contents
-            let mut file = std::fs::File::open(&file_path)
-                .map_err(|e| {
-                    eprintln!("Error opening file '{}': {}", file_path, e);
-                    e
-                })
-                .expect("Must Be Valid File");
-            file.read_to_string(&mut raw_data)
-                .map_err(|e| {
-                    eprintln!("Error reading file '{}': {}", file_path, e);
-                    e
-                })
-                .expect("Must Read To String");
-        }
-        None => {
-            // If no file is provided, read from stdin
-            std::io::stdin()
-                .read_to_string(&mut raw_data)
-                .expect("Must Be Able to Parse STDIN");
-        }
-    }
-
-    // Interpret escape sequences (e.g., `\n`)
-    let raw_data = raw_data.replace("\\n", "\n");
-
-    let parsed_data = ParsedData::from_raw_data(&raw_data);
-
-    // Serialize based on output format
-    match args.format {
-        OutputFormat::Json => {
-            let json_output =
-                serde_json::to_string(&parsed_data).expect("Failed to serialize to JSON");
-            println!("{}", json_output);
-        }
-        OutputFormat::Yaml => {
-            let yaml_output =
-                serde_yaml::to_string(&parsed_data).expect("Failed to serialize to YAML");
-            println!("{}", yaml_output);
-        }
-    }
+    pub format: OutputFormat,
 }
