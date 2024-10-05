@@ -8,7 +8,6 @@ repository = "https://github.com/anthonybtedesco/aamva-parser-rs"  # Update with
 license = "MIT"  # Specify your license
 authors = ["Anthony Tedesco <anthonybtedesco@gmail.com>"]  # Update with your information
 keywords = ["aamva", "barcode", "parser", "json", "yaml"]
-categories = ["Parsing", "Data Serialization"]
 readme = "README.md"  # Ensure you have a README.md file
 documentation = "https://docs.rs/aamva-parser-rs"  # Update with your documentation URL if available
 
